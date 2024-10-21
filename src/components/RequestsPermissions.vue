@@ -37,6 +37,11 @@
       />
     </v-col>
   </v-row>
+  <v-row v-if="permissions.view.enabled" no-gutters>
+    <v-col cols="2" class="d-flex flex-row align-center ga-3">
+      <v-checkbox v-model="permissions.create.enabled" label="Create" :hide-details="true" />
+    </v-col>
+  </v-row>
   <div class="text-center pa-4">
     <v-dialog v-model="isDialogOpen" max-width="400" persistent>
       <v-card
@@ -124,6 +129,9 @@ const permissions = ref({
   assign: {
     enabled: false,
     users: users.value[2].value,
+  },
+  create: {
+    enabled: false,
   },
 });
 
