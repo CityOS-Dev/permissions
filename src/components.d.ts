@@ -7,13 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppFooter: typeof import('./components/AppFooter.vue')['default']
-    copy: typeof import('./components/OffersPermissions copy.vue')['default']
     DepartmentsPermissions: typeof import('./components/DepartmentsPermissions.vue')['default']
     EventsPermissions: typeof import('./components/EventsPermissions.vue')['default']
     GroupsPermissions: typeof import('./components/GroupsPermissions.vue')['default']
     GuestsPermissions: typeof import('./components/GuestsPermissions.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     OffersPermissions: typeof import('./components/OffersPermissions.vue')['default']
     PartnersPermissions: typeof import('./components/PartnersPermissions.vue')['default']
     RequestsPermissions: typeof import('./components/RequestsPermissions.vue')['default']
