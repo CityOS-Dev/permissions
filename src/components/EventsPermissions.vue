@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col>
-      <h3>Partners companies & users</h3>
+      <h3>Events</h3>
     </v-col>
   </v-row>
   <v-row no-gutters>
@@ -12,8 +12,8 @@
       <v-select
         density="comfortable"
         :hide-details="true"
-        :items="partners"
-        v-model="permissions.view.partners"
+        :items="events"
+        v-model="permissions.view.events"
         :disabled="!permissions.view.enabled"
       />
     </v-col>
@@ -37,45 +37,88 @@
         density="comfortable"
         :hide-details="true"
         :items="updateDeletePartners"
-        v-model="permissions.updateDelete.partners"
+        v-model="permissions.updateDelete.events"
         :disabled="!permissions.updateDelete.enabled"
       />
     </v-col>
   </v-row>
+  <div class="text-center pa-4">
+    <v-dialog v-model="isDialogOpen" max-width="400" persistent>
+      <v-card
+        prepend-icon="mdi-map-marker"
+        text="Access to creation events will automatically grant access to partners companies and users."
+        title="Grant access to creation events?"
+      >
+        <template v-slot:actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            @click="
+              () => {
+                permissions.create.enabled = false;
+                store.setCanCreatePartners(false);
+                isDialogOpen = false;
+              }
+            "
+          >
+            Cancel
+          </v-btn>
+
+          <v-btn @click="isDialogOpen = false"> Ok </v-btn>
+        </template>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
-const partners = ref([
+import { useAppStore } from "@/stores/app";
+
+const store = useAppStore();
+
+const isDialogOpen = ref(false);
+
+const events = ref([
   {
-    title: "Any partner",
+    title: "Any event",
     value: "any",
   },
   {
     title: "Created by the user or their department",
-    value: "by_the_user_or_their_department",
+    value: "created_by_the_user_or_their_department",
   },
   {
     title: "Created by the user",
-    value: "by_the_user",
+    value: "created_by_the_user",
   },
 ]);
 
 const permissions = ref({
   view: {
     enabled: true,
-    partners: partners.value[0].value,
+    events: events.value[2].value,
   },
   create: {
     enabled: false,
   },
   updateDelete: {
     enabled: false,
-    partners: partners.value.find((p) => p.value === "by_the_user")?.value,
+    events: events.value.find((p) => p.value === "created_by_the_user")?.value,
   },
 });
 
+watch(
+  () => permissions.value.create.enabled,
+  (isEnabled) => {
+    if (isEnabled && !store.canCreatePartners) {
+      isDialogOpen.value = true;
+    }
+    store.setCanCreateEvents(isEnabled);
+  }
+);
+
 const updateDeletePartners = computed(() =>
-  partners.value.slice(partners.value.findIndex((p) => p.value === permissions.value.view.partners))
+  events.value.slice(events.value.findIndex((p) => p.value === permissions.value.view.events))
 );
 
 watch(
@@ -89,8 +132,8 @@ watch(
 );
 
 watch(updateDeletePartners, () => {
-  if (!updateDeletePartners.value.find((p) => p.value === permissions.value.view.partners)) {
-    permissions.value.updateDelete.partners = updateDeletePartners.value[0].value;
+  if (!updateDeletePartners.value.find((p) => p.value === permissions.value.updateDelete.events)) {
+    permissions.value.updateDelete.events = updateDeletePartners.value[0].value;
   }
 });
 </script>
