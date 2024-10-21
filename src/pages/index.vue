@@ -46,6 +46,11 @@
           <OffersPermissions />
         </v-col>
       </v-row>
+      <v-row>
+        <v-col>
+          <RequestsPermissions />
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>

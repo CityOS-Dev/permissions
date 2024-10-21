@@ -8,7 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
-    copy: typeof import('./components/TenantsPermissions copy.vue')['default']
+    copy: typeof import('./components/OffersPermissions copy.vue')['default']
     DepartmentsPermissions: typeof import('./components/DepartmentsPermissions.vue')['default']
     EventsPermissions: typeof import('./components/EventsPermissions.vue')['default']
     GroupsPermissions: typeof import('./components/GroupsPermissions.vue')['default']
@@ -16,6 +16,7 @@ declare module 'vue' {
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     OffersPermissions: typeof import('./components/OffersPermissions.vue')['default']
     PartnersPermissions: typeof import('./components/PartnersPermissions.vue')['default']
+    RequestsPermissions: typeof import('./components/RequestsPermissions.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StaffPermissions: typeof import('./components/StaffPermissions.vue')['default']
