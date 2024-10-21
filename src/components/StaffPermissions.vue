@@ -25,6 +25,9 @@
 </template>
 
 <script lang="ts" setup>
+import { useAppStore } from "@/stores/app";
+
+const store = useAppStore();
 const departments = ref([
   {
     title: "Any user",
@@ -42,4 +45,24 @@ const permissions = ref({
     departments: departments.value[1].value,
   },
 });
+
+watch(
+  () => permissions.value.view.enabled,
+  (isEnabled) => {
+    store.setCanViewStaff(isEnabled);
+  }
+);
+
+watch(
+  () => [store.canAssignToDepartment, store.canAssignToAnyUser],
+  ([canAssignToDepartment, canAssignToAnyUser]) => {
+    if (canAssignToDepartment || canAssignToAnyUser) {
+      permissions.value.view.enabled = true;
+      permissions.value.view.departments = canAssignToDepartment ? "user_department" : "any";
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+    }
+  }
+);
 </script>

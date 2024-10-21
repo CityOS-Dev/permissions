@@ -6,9 +6,12 @@ export const useAppStore = defineStore("app", {
     canCreatePartners: false,
     canCreateOffers: false,
     canCreateEvents: false,
+    canViewStaff: false,
     canViewUserGroups: false,
     canViewTenants: false,
     canViewGuests: false,
+    canAssignToDepartment: false,
+    canAssignToAnyUser: false,
   }),
   actions: {
     setCanCreatePartners(canCreatePartners: boolean) {
@@ -20,6 +23,9 @@ export const useAppStore = defineStore("app", {
     setCanCreateEvents(canCreateEvents: boolean) {
       this.canCreateEvents = canCreateEvents;
     },
+    setCanViewStaff(canViewStaff: boolean) {
+      this.canViewStaff = canViewStaff;
+    },
     setCanViewUserGroups(canViewUserGroups: boolean) {
       this.canViewUserGroups = canViewUserGroups;
     },
@@ -28,6 +34,12 @@ export const useAppStore = defineStore("app", {
     },
     setCanViewGuests(canViewGuests: boolean) {
       this.canViewGuests = canViewGuests;
+    },
+    setCanAssignToDepartment(canAssignToDepartment: boolean) {
+      this.canAssignToDepartment = canAssignToDepartment;
+    },
+    setCanAssignToAnyUser(canAssignToAnyUser: boolean) {
+      this.canAssignToAnyUser = canAssignToAnyUser;
     },
   },
 });
