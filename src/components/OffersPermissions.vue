@@ -8,7 +8,7 @@
     <v-col cols="2" class="d-flex flex-row align-center ga-3">
       <v-checkbox
         v-model="permissions.view.enabled"
-        label="View approved"
+        label="View"
         :hide-details="true"
         :disabled="permissions.viewAndApprove.enabled"
       />
@@ -27,7 +27,7 @@
     <v-col cols="2" class="d-flex flex-row align-center ga-3">
       <v-checkbox
         v-model="permissions.viewAndApprove.enabled"
-        label="View and approve created by partner"
+        label="Approve"
         :hide-details="true"
       />
     </v-col>
