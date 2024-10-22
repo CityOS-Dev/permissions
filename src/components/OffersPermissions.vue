@@ -37,7 +37,7 @@
         :hide-details="true"
         :items="partners"
         v-model="permissions.viewAndApprove.partners"
-        :disabled="!permissions.view.enabled"
+        :disabled="!permissions.viewAndApprove.enabled"
       />
     </v-col>
     <v-col
